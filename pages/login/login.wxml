@@ -1,0 +1,22 @@
+<view class="test-bg">
+    <image src="../../images/bg.jpg" class="bg-image" mode="scaleToFill"></image>
+</view>
+<image class='logo'  src='../../images/logo.png'>
+</image>
+
+<image class='company'  src='../../images/companyName.png'>
+</image>
+
+<input wx:if="{{showPhone}}" class='in-phone' placeholder="请输入手机号" bindinput="inputPhone">
+</input>
+
+<button wx:if="{{showPhone}}" bindtap='suerPhone' class='suer-phone'>
+  确定
+</button>
+
+<input wx:if="{{showYzm}}" class='in-yzm' placeholder="验证码" bindinput="inputYzm">
+</input>
+
+<button wx:if="{{showYzm}}" bindtap='suerYzm' class='suer-yzm'>
+  确定
+</button>
