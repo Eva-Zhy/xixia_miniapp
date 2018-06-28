@@ -1,4 +1,4 @@
-<view class="page__bd">
+<!-- <view class="page__bd">
   <view class="weui-tab">
     <view class="weui-navbar">
       <block wx:for="{{tabs}}" wx:key="*this">
@@ -9,93 +9,36 @@
       <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
     </view>
     <view class="weui-tab__panel">
-      <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-        
-        <view class='zuzhi'>
-          <view class='wjj-v'>
-            <image class='img100' src='../../images/wjj.png'></image>
-          </view>
-          <view class='wjj-name'>
-            大古井街道
-          </view>
-           <view class='jt-v'>
-            <image class='img100' src='../../images/jiantou.png'></image>
-          </view>
-        </view>
-         <view class='zuzhi'>
-          <view class='wjj-v'>
-            <image class='img100' src='../../images/wjj.png'></image>
-          </view>
-          <view class='wjj-name'>
-            大古井街道
-          </view>
-           <view class='jt-v'>
-            <image class='img100' src='../../images/jiantou.png'></image>
-          </view>
-        </view> <view class='zuzhi'>
-          <view class='wjj-v'>
-            <image class='img100' src='../../images/wjj.png'></image>
-          </view>
-          <view class='wjj-name'>
-            大古井街道
-          </view>
-           <view class='jt-v'>
-            <image class='img100' src='../../images/jiantou.png'></image>
-          </view>
-        </view> <view class='zuzhi'>
-          <view class='wjj-v'>
-            <image class='img100' src='../../images/wjj.png'></image>
-          </view>
-          <view class='wjj-name'>
-            大古井街道
-          </view>
-           <view class='jt-v'>
-            <image class='img100' src='../../images/jiantou.png'></image>
-          </view>
-        </view> <view class='zuzhi'>
-          <view class='wjj-v'>
-            <image class='img100' src='../../images/wjj.png'></image>
-          </view>
-          <view class='wjj-name'>
-            大古井街道
-          </view>
-           <view class='jt-v'>
-            <image class='img100' src='../../images/jiantou.png'></image>
-          </view>
-        </view> <view class='zuzhi'>
-          <view class='wjj-v'>
-            <image class='img100' src='../../images/wjj.png'></image>
-          </view>
-          <view class='wjj-name'>
-            大古井街道
-          </view>
-           <view class='jt-v'>
-            <image class='img100' src='../../images/jiantou.png'></image>
-          </view>
-        </view> <view class='zuzhi'>
-          <view class='wjj-v'>
-            <image class='img100' src='../../images/wjj.png'></image>
-          </view>
-          <view class='wjj-name'>
-            大古井街道
-          </view>
-           <view class='jt-v'>
-            <image class='img100' src='../../images/jiantou.png'></image>
-          </view>
-        </view> <view class='zuzhi'>
-          <view class='wjj-v'>
-            <image class='img100' src='../../images/wjj.png'></image>
-          </view>
-          <view class='wjj-name'>
-            大古井街道
-          </view>
-           <view class='jt-v'>
-            <image class='img100' src='../../images/jiantou.png'></image>
-          </view>
-        </view>
-      </view>
+      <view class="weui-tab__content" hidden="{{activeIndex != 0}}"> -->
+<view class='flex-v'>
+  <view wx:if="{{cameras.length != 0}}" wx:for="{{cameras}}" wx:for-index="idx" wx:for-item="itemName" class='zuzhi' data-id='{{itemName.id}}' bindtap='_getCameraListByID'>
+    <view class='wjj-v'>
+      <image class='img100' src='../../images/splogo.png'></image>
+    </view>
+    <view class='wjj-name'>
+      {{itemName.name}}
+    </view>
+    <!-- <view class='jt-v'>
+      <image class='img100' src='../../images/jiantou.png'></image>
+    </view> -->
+  </view>
+
+  <view wx:if="{{orgList.length != 0}}" wx:for="{{orgList}}" wx:for-index="idx" wx:for-item="itemName" class='zuzhi' data-id='{{itemName.id}}' bindtap='_goOrgList'>
+    <view class='wjj-v'>
+      <image class='img100' src='../../images/splogo.png'></image>
+    </view>
+    <view class='wjj-name'>
+      {{itemName.name}}
+    </view>
+    <!-- <view class='jt-v'>
+      <image class='img100' src='../../images/jiantou.png'></image>
+    </view> -->
+  </view>
+</view>
+<!-- </view> -->
+<!-- 
       <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-       <view class='zuzhi'>
+        <view class='zuzhi'>
           <view class='wjj-v'>
             <image class='img100' src='../../images/sxt.png'></image>
           </view>
@@ -106,4 +49,4 @@
       </view>
     </view>
   </view>
-</view>
+</view> -->

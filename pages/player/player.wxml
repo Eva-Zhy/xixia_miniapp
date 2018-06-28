@@ -1,29 +1,29 @@
 <view class='live-box'>
   <live-player class="live-player" id="myLive" bindstatechange="onPlayChange" bindfullscreenchange="onFullscreenChange" src="{{isUrlMain?urlMain:urlAssist}}" mode="live" autoplay="{{isPlay}}" background-mute="{{true}}" object-fit="fillCrop">
     <cover-view class="cover-box" catchtap="handleBarShow">
-       <cover-image class="cover-key-center" wx:if="{{!isPlay}}" catchtap="handlePlay" src="../../images/push.png" />
+       <cover-image class="cover-key-center" wx:if="{{!isPlay}}" catchtap="handlePlay" src="../../images/play.png" />
       <cover-view class="cover-key" wx:if="{{isFullscreen && isBarShow}}" catchtap="keepBarShow">
         <cover-view class="cover-key1" catchtap="handlePlayStop">
-          <cover-image wx:if="{{isPlay}}" src="../../images/push.png" />
+          <cover-image wx:if="{{isPlay}}" src="../../images/pause.png" />
           <cover-image wx:else src="../../images/sxt.png" />
         </cover-view>
-        <cover-view class="cover-key3" wx:if="{{urlAssist}}" catchtap="handleMainAssist">
+        <!-- <cover-view class="cover-key3" wx:if="{{urlAssist}}" catchtap="handleMainAssist">
           <cover-view wx:if="{{isUrlMain}}">主流</cover-view>
           <cover-view wx:else>辅流</cover-view>
-        </cover-view>
-        <cover-image class="cover-key5" catchtap="handleExitFullScreen" src="../../images/quanping.png" />
+        </cover-view> -->
+        <cover-image class="cover-key5" catchtap="handleExitFullScreen" src="../../images/offqp.png" />
       </cover-view>
     </cover-view>
   </live-player>
   <view class="live-key" wx:if="{{!isFullscreen}}">
     <view class="key1" catchtap="handlePlayStop">
-      <image wx:if="{{isPlay}}" src="../../images/wjj.png" />
-      <image wx:else src="../../images/live.png" />
+      <image wx:if="{{isPlay}}" src="../../images/pause.png" />
+      <image wx:else src="../../images/play.png" />
     </view>
-    <view class="key3" catchtap="handleMainAssist">
+    <!-- <view class="key3" catchtap="handleMainAssist">
       <text wx:if="{{isUrlMain}}">主流</text>
       <text wx:else>辅流</text>
-    </view>
+    </view> -->
     <image class="key5" catchtap="handleRequestFullScreen" src="../../images/quanping.png" />
   </view>
 </view>

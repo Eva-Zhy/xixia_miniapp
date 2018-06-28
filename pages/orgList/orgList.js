@@ -1,65 +1,45 @@
 import { Config } from '../../utils/config.js';
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    id: '',
-    groupName: '',
-    cameras: []
+    orgId: 0,
+    mUserId : 0,
+    currentPage: 0,
+    pageSize: 10,
+    cameraList: [],
+    orgList: []
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
+    console.log(options);
     var that = this;
-    that.data.id = options.id;
-    that.data.groupName = options.groupName;
+    that.data.orgId = options.orgId;
+    that.data.mUserId = options.mUserId;
 
-    that._getCamerasList(that.data.id, that.data.groupName);
+    that._getOrg();
   },
-  _goPlayerView: function () {
-    wx.navigateTo({
-      url: '../player/player'
-    })
-  },
-  _getCamerasList: function (id, groupName) {
+  _getOrg: function(){
     var that = this;
     wx.request({
-      url: Config.restUrl + '/service/video_access_copy/list_cameras',
+      url: Config.restUrl + '/service/resource/get_camera_orgs_by_parent',
       data: {
-        isRoot: '1',
-        id: id,
-        type: 'customize',
-        groupName: that.data.groupName
+        masterOrgId: that.data.orgId,
+        currentPage: that.data.currentPage,
+        pageSize: that.data.pageSize,
+        mUserId: that.data.mUserId
       },
       header: {
-        'content-type': 'application/json', 
+        'content-type': 'application/json', // 默认值
         'cookie': wx.getStorageSync("sessionid")
       },
       success: function (res) {
         console.log(res.data)
         if (res.data.code == 200) {
-          that.data.cameras = res.data.data.cameras;
-          that.setData({
-            cameras: that.data.cameras
-          });
+          that.data.cameraList = res.data.data.cameraList;
+          that.data.orgList = res.data.data.orgList;
 
-          if (that.data.cameras.length == 0) {
-            wx.showModal({
-              title: '提示',
-              content: '获取组织结构详情数据为空，返回上一级！',
-              success: function (res) {
-                if (res.confirm) {
-                  wx.navigateBack();
-                } else {
-                  wx.navigateBack();
-                }
-              }
-            })
-          }
+          that.setData({
+            cameraList: that.data.cameraList,
+            orgList: that.data.orgList
+          });
         } else {
           wx.showModal({
             title: '提示',
@@ -71,8 +51,19 @@ Page({
             }
           })
         }
-
       }
+    })
+  },
+  _goPlayerView: function () {
+    wx.navigateTo({
+      url: '../player/player'
+    })
+  },
+  _goOrgList: function (e) {
+    console.log(e);
+    var that = this;
+    wx.navigateTo({
+      url: '../orgList/orgList?orgId=' + e.currentTarget.dataset.id + '&mUserId=' + that.data.mUserId
     })
   },
   /**

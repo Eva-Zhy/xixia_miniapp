@@ -1,0 +1,20 @@
+<view wx:if="{{orgList.length != 0}}" wx:for="{{orgList}}" wx:for-index="idx" wx:for-item="itemName" class='zuzhi' data-id='{{itemName.id}}' bindtap='_goOrgList'>
+  <view class='wjj-v'>
+    <image class='img100' src='../../images/splogo.png'></image>
+  </view>
+  <view class='wjj-name'>
+    {{itemName.name}}
+  </view>
+  <!-- <view class='jt-v'>
+    <image class='img100' src='../../images/jiantou.png'></image>
+  </view> -->
+</view>
+
+<view wx:if="{{cameraList.length != 0}}" wx:for="{{cameraList}}" wx:for-index="idx" wx:for-item="itemName" class='zuzhi' data-id='{{itemName.id}}' bindtap='_goPlayerView'>
+  <view class='wjj-v'>
+    <image class='img100' src='../../images/sxt.png'></image>
+  </view>
+  <view class='wjj-name'>
+    {{itemName.name}}
+  </view>
+</view>

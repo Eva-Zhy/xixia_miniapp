@@ -1,11 +1,12 @@
 {
   "pages": [
+    "pages/login/login",
+    "pages/videoList/videoList",
     "pages/player/player",
     "pages/index/index",
     "pages/playerList/playerList",
-    "pages/videoList/videoList",
-    "pages/login/login",
-    "pages/pusher/pusher"
+    "pages/pusher/pusher",
+    "pages/orgList/orgList"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,30 +1,10 @@
-<view class='zuzhi'>
-          <view class='wjj-v'>
-            <image class='img100' src='../../images/sxt.png'></image>
-          </view>
-          <view class='wjj-name'>
-            大古井街道
-          </view>
-</view>
-<view class='zuzhi'>
-          <view class='wjj-v'>
-            <image class='img100' src='../../images/sxt.png'></image>
-          </view>
-          <view class='wjj-name'>
-            大古井街道
-          </view>
-</view><view class='zuzhi'>
-          <view class='wjj-v'>
-            <image class='img100' src='../../images/sxt.png'></image>
-          </view>
-          <view class='wjj-name'>
-            大古井街道
-          </view>
-</view><view class='zuzhi'>
-          <view class='wjj-v'>
-            <image class='img100' src='../../images/sxt.png'></image>
-          </view>
-          <view class='wjj-name'>
-            大古井街道
-          </view>
+<view class='flex-v'>
+  <view wx:if="{{cameras.length != 0}}" wx:for="{{cameras}}" wx:for-index="idx" wx:for-item="itemName" class='zuzhi' bindtap='_goPlayerView'>
+    <view class='wjj-v'>
+      <image class='img100' src='../../images/sxt.png'></image>
+    </view>
+    <view class='wjj-name'>
+      {{itemName.name}}
+    </view>
+  </view>
 </view>

@@ -1,8 +1,8 @@
 Page({
   data: {
     //测试
-    urlMain: "rtmp://live.hkstv.hk.lxdns.com/live/hks",
-    urlAssist: "rtmp://v1.one-tv.com/live/mpegts.stream",
+    urlMain: "rtmp://222.190.121.133:10935/hls/stream_1",
+    urlAssist: "rtmp://222.190.121.133:10935/hls/stream_1",
     isPlay: true,
     isUrlMain: true,
     isFullscreen: false,
@@ -13,6 +13,9 @@ Page({
   },
   onFullscreenChange() {
     this.setData({ isFullscreen: !this.data.isFullscreen });
+  },
+  onPlayChange(e){
+    console.log('live-player code:', e.detail.code)
   },
   handlePlayStop() {
     if (this.data.isPlay) {

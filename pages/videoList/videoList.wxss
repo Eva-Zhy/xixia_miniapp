@@ -1,18 +1,31 @@
 @import "../../style/weui.wxss";
 
+.flex-v {
+
+}
+
+page {
+  background-color: #f0edf1;
+}
+
 .zuzhi {
-  width: 95%;
-  height: 100rpx;
+  width: 46%;
+  height: auto;
   border-bottom: 1px solid #ddd;
   float: left;
-  margin-left: 5%;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 2.5%;
+  background-color: #fff;
+  text-align: center;
 }
 
 .wjj-v {
-  width: 70rpx;
-  height: 70rpx;
-  float: left;
-  margin-top: 18rpx;
+  width: 120rpx;
+  height: 120rpx;
+  display: block;
+  margin: 0 auto;
+  margin-top: 40rpx;
 }
 
 .jt-v {
@@ -24,15 +37,17 @@
 }
 
 .wjj-name {
-  width: 80%;
-  height: 100rpx;
+  width: 100%;
+  max-width: 350rpx;
+  height: 80rpx;
   float: left;
-  line-height: 110rpx;
-  margin-left: 10rpx;
+  line-height: 90rpx;
   font-size: 30rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin-top: 50rpx;
+  border-top: 2rpx solid #f0edf1;
 }
 
 .img100 {
