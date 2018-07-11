@@ -11,9 +11,9 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.1.1",
-	"appid": "wxc023622a9c564c9f",
-	"projectname": "applet_live_demo",
+	"libVersion": "2.0.4",
+	"appid": "wxe03a91eea2d45f89",
+	"projectname": "xixia_miniapp",
 	"condition": {
 		"search": {
 			"current": -1,

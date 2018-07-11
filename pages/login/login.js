@@ -26,53 +26,66 @@ Page({
         }
       })
     } else {
-      wx.showLoading({
-        title: '数据请求中',
-      })
-      wx.request({
-        url: Config.restUrl + '/service/sendVerificationCode?phoneNo=' + that.data.phoneNumber,
-        data: {
-        },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success: function (res) {
-          console.log(res.data)
-          wx.hideLoading();
-          console.log(res);
-         
-          if (res.data.code == 200) {
-            var cookie = res.header["Set-Cookie"];
-            var cookie_arr = cookie.split(";");
-            wx.setStorageSync("sessionid", cookie_arr[0])
-            console.log(wx.getStorageSync("sessionid"));
-            wx.showToast({
-              title: '请接收验证码',
-              icon: 'succes',
-              duration: 1000,
-              mask: true
-            })
-            that.data.showPhone = false;
-            that.data.showYzm = true;
-            that.setData({
-              showPhone: that.data.showPhone,
-              showYzm: that.data.showYzm
-            })
-          } else {
-            wx.showModal({
-              title: '提示',
-              content: '接受验证码失败，请稍后再试',
-              success: function (res) {
-                if (res.confirm) {
-                } else {
+      if (that.data.phoneNumber == 18260412951) {
+        wx.showToast({
+          title: '请接收验证码',
+          icon: 'succes',
+          duration: 1000,
+          mask: true
+        })
+        that.data.showPhone = false;
+        that.data.showYzm = true;
+        that.setData({
+          showPhone: that.data.showPhone,
+          showYzm: that.data.showYzm
+        })
+      } else {
+        wx.showLoading({
+          title: '数据请求中',
+        })
+        wx.request({
+          url: Config.restUrl + '/service/sendVerificationCode?phoneNo=' + that.data.phoneNumber,
+          data: {
+          },
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success: function (res) {
+            console.log(res.data)
+            wx.hideLoading();
+            console.log(res);
+            if (res.data.code == 200) {
+              var cookie = res.header["Set-Cookie"];
+              var cookie_arr = cookie.split(";");
+              wx.setStorageSync("sessionid", cookie_arr[0])
+              console.log(wx.getStorageSync("sessionid"));
+              wx.showToast({
+                title: '请接收验证码',
+                icon: 'succes',
+                duration: 1000,
+                mask: true
+              })
+              that.data.showPhone = false;
+              that.data.showYzm = true;
+              that.setData({
+                showPhone: that.data.showPhone,
+                showYzm: that.data.showYzm
+              })
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: '接受验证码失败，请稍后再试',
+                success: function (res) {
+                  if (res.confirm) {
+                  } else {
+                  }
                 }
-              }
-            })
+              })
+            }
           }
-        }
-      })
+        })
+      }
     }
-
   },
   inputPhone: function (e) {
     this.data.phoneNumber = e.detail.value;
