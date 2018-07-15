@@ -1,7 +1,8 @@
 <view class='flex-v'>
-  <view wx:if="{{cameras.length != 0}}" wx:for="{{cameras}}" wx:for-index="idx" wx:for-item="itemName" class='zuzhi' bindtap='_goPlayerView'>
+  <view wx:if="{{cameras.length != 0}}" wx:for="{{cameras}}" wx:for-index="idx" wx:for-item="itemName" class='zuzhi' data-id='{{itemName.id}}' data-type='{{itemName.type}}' bindtap='_goPlayerView'>
     <view class='wjj-v'>
-      <image class='img100' src='../../images/sxt.png'></image>
+      <image wx:if="{{itemName.type == 'camera'}}" class='img100' src='../../images/sxt.png'></image>
+      <image wx:if="{{itemName.type == 'group'}}" class='img100' src='../../images/splogo.png'></image>
     </view>
     <view class='wjj-name'>
       {{itemName.name}}

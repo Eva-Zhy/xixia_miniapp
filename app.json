@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/login/login",
-    "pages/videoList/videoList",
     "pages/player/player",
+    "pages/videoList/videoList",
     "pages/index/index",
     "pages/playerList/playerList",
     "pages/pusher/pusher",

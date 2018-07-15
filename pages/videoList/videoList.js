@@ -1,5 +1,7 @@
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
-import { Config } from '../../utils/config.js';
+import {
+  Config
+} from '../../utils/config.js';
 
 Page({
   data: {
@@ -17,12 +19,13 @@ Page({
     pageSize: 10,
     orgList: []
   },
-  _goPlayerView: function () {
+  _goPlayerView: function() {
     wx.navigateTo({
       url: '../player/player'
     })
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
+    console.log("videoList");
     wx.showLoading({
       title: '数据请求中',
     })
@@ -36,7 +39,7 @@ Page({
     // 获取相机列表
     that._getCamera();
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.setData({
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
@@ -44,13 +47,13 @@ Page({
       }
     });
   },
-  tabClick: function (e) {
+  tabClick: function(e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
   },
-  _getCamera: function () {
+  _getCamera: function() {
     var that = this;
     console.log(that.data.groupName);
     if (that.data.userType == 3) {
@@ -65,7 +68,7 @@ Page({
           'content-type': 'application/json', // 默认值
           'cookie': wx.getStorageSync("sessionid")
         },
-        success: function (res) {
+        success: function(res) {
           wx.hideLoading();
           console.log(res.data)
           if (res.data.code == 200) {
@@ -77,10 +80,8 @@ Page({
               wx.showModal({
                 title: '提示',
                 content: '尚未加入任何街道，请和管理员联系！',
-                success: function (res) {
-                  if (res.confirm) {
-                  } else {
-                  }
+                success: function(res) {
+                  if (res.confirm) {} else {}
                 }
               })
             }
@@ -88,10 +89,8 @@ Page({
             wx.showModal({
               title: '提示',
               content: '获取组织结构失败，请稍后再试！',
-              success: function (res) {
-                if (res.confirm) {
-                } else {
-                }
+              success: function(res) {
+                if (res.confirm) {} else {}
               }
             })
           }
@@ -110,7 +109,7 @@ Page({
           'content-type': 'application/json', // 默认值
           'cookie': wx.getStorageSync("sessionid")
         },
-        success: function (res) {
+        success: function(res) {
           wx.hideLoading();
           console.log(res.data)
           if (res.data.code == 200) {
@@ -122,9 +121,11 @@ Page({
             wx.showModal({
               title: '提示',
               content: '获取组织结构失败，请稍后再试！',
-              success: function (res) {
+              success: function(res) {
                 if (res.confirm) {
+                  wx.navigateBack();
                 } else {
+                  wx.navigateBack();
                 }
               }
             })
@@ -133,13 +134,13 @@ Page({
       })
     }
   },
-  _getCameraListByID: function (e) {
+  _getCameraListByID: function(e) {
     var that = this;
     wx.navigateTo({
-      url: '../playerList/playerList?id=' + e.currentTarget.dataset.id + '&groupName=' + that.data.groupName
+      url: '../playerList/playerList?id=' + e.currentTarget.dataset.id + '&groupName=' + that.data.groupName + '&type=' + e.currentTarget.dataset.type
     })
   },
-  _goOrgList: function (e) {
+  _goOrgList: function(e) {
     console.log(e);
     var that = this;
     wx.navigateTo({
