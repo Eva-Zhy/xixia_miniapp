@@ -12,26 +12,30 @@
       <view class="weui-tab__content" hidden="{{activeIndex != 0}}"> -->
 <view class='flex-v'>
   <view wx:if="{{cameras.length != 0}}" wx:for="{{cameras}}" wx:for-index="idx" wx:for-item="itemName" class='zuzhi' data-id='{{itemName.id}}' data-type='{{itemName.type}}' bindtap='_getCameraListByID'>
-    <view class='wjj-v'>
+    <!-- <view class='wjj-v'>
       <image wx:if="{{itemName.type == 'camera'}}" class='img100' src='../../images/sxt.png'></image>
       <image wx:if="{{itemName.type == 'group'}}" class='img100' src='../../images/splogo.png'></image>
-    </view>
+    </view> -->
     <view class='wjj-name'>
       {{itemName.name}}
     </view>
-
+<view class='jt-v'>
+      <image class='img100' src='../../images/jiantou.png'></image>
+    </view>
   </view>
 
   <view wx:if="{{orgList.length != 0}}" wx:for="{{orgList}}" wx:for-index="idx" wx:for-item="itemName" class='zuzhi' data-id='{{itemName.id}}' bindtap='_goOrgList'>
-    <view class='wjj-v'>
+  <!-- <view class='zuzhi'> -->
+    <!-- <view class='wjj-v'>
       <image class='img100' src='../../images/splogo.png'></image>
-    </view>
+    </view> -->
     <view class='wjj-name'>
       {{itemName.name}}
+    <!-- 11111111 -->
     </view>
-    <!-- <view class='jt-v'>
+    <view class='jt-v'>
       <image class='img100' src='../../images/jiantou.png'></image>
-    </view> -->
+    </view>
   </view>
 </view>
 <!-- </view> -->

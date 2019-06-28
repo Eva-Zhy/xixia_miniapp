@@ -24,6 +24,7 @@ Page({
   },
   _goPlayerView: function(e) {
     var that = this;
+    console.log(e);
     if (e.currentTarget.dataset.type == 'camera') {
       wx.navigateTo({
         url: '../player/player?id=' + e.currentTarget.dataset.id

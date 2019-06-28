@@ -1,6 +1,7 @@
 import {
   Config
 } from '../../utils/config.js';
+const app = getApp()
 Page({
   data: {
     //测试 rtmp://222.190.121.133:10935/hls/stream_1
@@ -10,9 +11,12 @@ Page({
     isUrlMain: true,
     isFullscreen: false,
     isBarShow: true,
-    cameraId: 0,
+    cameraId: 5,
     rtsp_str: '',
     get_id: 0,
+    pvgtitle:'',
+    postUrl:"",
+    cameraTitle:"",
     c_name: ''
   },
   onLoad: function(options) {
@@ -22,12 +26,15 @@ Page({
     var that = this;
     console.log(options);
     that.data.cameraId = options.id;
+    that.data.cameraTitle = options.cameraTitle;
     that._getPvgInfo();
+    // that._login();
   },
   _login: function() {
     var that = this;
     wx.request({
-      url: 'http://222.190.121.133:10800' + '/login',
+      // url: 'http://qxjk.njqxq.gov.cn:10800' + '/login',
+      url: that.data.postUrl + 'https://qxjk.njqxq.gov.cn:10800' + '/login',
       data: {
         username: 'admin',
         password: 'e59cf56e33f978124da804b7e12c0d53'
@@ -38,9 +45,11 @@ Page({
       },
       success: function(res) {
         console.log(res)
-        var cookie = res.header["set-cookie"];
+        var cookie = res.header['Set-Cookie'];
+        // console.log(cookie);
         var cookie_arr = cookie.split(";");
         wx.setStorageSync("sid", cookie_arr[0])
+        // wx.setStorageSync("sid", cookie)
         console.log(wx.getStorageSync("sid"));
         that._save();
       }
@@ -50,7 +59,7 @@ Page({
     var that = this;
     console.log(that.data.rtsp_str);
     wx.request({
-      url: 'http://222.190.121.133:10800' + '/vlive/get',
+      url: that.data.postUrl+ 'https://qxjk.njqxq.gov.cn:10800' + '/vlive/get',
       data: {
         id: 'c' + that.data.cameraId,
       },
@@ -63,9 +72,12 @@ Page({
         console.log(res.data)
 
         if (res.data.session instanceof Object) {
-          that.data.urlMain = res.data.session.RTMP;
+          // that.data.urlMain = 'https://qxjk.njqxq.gov.cn:10800' + res.data.session["HTTP-FLV"];
+          that.data.urlMain =res.data.session.RTMP;
+          // that.data.urlAssist = 'https://qxjk.njqxq.gov.cn:10800' + res.data.session["HTTP-FLV"];
           that.data.urlAssist = res.data.session.RTMP;
           console.log(that.data.urlMain);
+          wx.hideLoading();
           that.setData({
             urlMain: that.data.urlMain,
             urlAssist: that.data.urlAssist
@@ -91,7 +103,7 @@ Page({
     var that = this;
     console.log(that.data.rtsp_str);
     wx.request({
-      url: 'http://222.190.121.133:10800' + '/vlive/save',
+      url: that.data.postUrl+'https://qxjk.njqxq.gov.cn:10800' + '/vlive/save',
       data: {
         name: that.data.c_name,
         // cid: 9,
@@ -122,7 +134,7 @@ Page({
     var that = this;
     console.log(that.data.rtsp_str);
     wx.request({
-      url: 'http://222.190.121.133:10800' + '/vlive/start',
+      url: that.data.postUrl+ 'https://qxjk.njqxq.gov.cn:10800' + '/vlive/start',
       data: {
         id: 'c' + that.data.cameraId
       },
@@ -136,16 +148,16 @@ Page({
         // 启动
         setTimeout(function() {
           that._get();
-        }, 4000)
+        }, 15000)
       }
     })
   },
   _getRTSP: function() {
     var that = this;
     wx.request({
-      url: 'http://222.190.121.133:19999/media/mediauri',
+url:that.data.postUrl+'http://qxjk.njqxq.gov.cn:19999/media/mediauri',
       data: {
-        PvgTitle: "pvgff8080815c3f372a015c3f372af80000",
+        PvgTitle: that.data.pvgtitle,
         CameraName: that.data.c_name
       },
       method: 'POST',
@@ -158,7 +170,7 @@ Page({
           var RtspUri_arr = res.data.RtspUri.split("/av");
           that.data.rtsp_str = RtspUri_arr[0] + '/' + that.data.c_name;
           // that.data.rtsp_str = "rtsp://172.15.1.24:554:554/PVG/live/?PVG=172.15.1.26:2100/admin/admin/av/1/7/10";
-          that._login();
+          // that._login();
         } else {
           wx.hideLoading();
           wx.showModal({
@@ -189,17 +201,69 @@ Page({
       success: function(res) {
         console.log(res.data)
         if (res.data.code == 200) {
-          // that.data.rtsp_str = "rtsp://172.15.1.24:554/PVG/live/?PVG=" + res.data.data.channel.sd_channel[0].ip + ':' + res.data.data.channel.sd_channel[0].port + "/" + res.data.data.channel.sd_channel[0].username + "/" + res.data.data.channel.sd_channel[0].password + "/" + res.data.data.channel.sd_channel[0].av_obj;
-          that.data.rtsp_str = 'rtsp://172.15.1.24:554/PVG/live/?PVG=172.15.1.26:2100/admin/admin/av/1/7/31'
+          that.data.rtsp_str = "rtsp://172.15.1.24:554/PVG/live/?PVG=" + res.data.data.channel.sd_channel[0].ip + ':' + res.data.data.channel.sd_channel[0].port + "/" + res.data.data.channel.sd_channel[0].username + "/" + res.data.data.channel.sd_channel[0].password + "/" + res.data.data.channel.sd_channel[0].av_obj;
+          // that.data.rtsp_str = 'rtsp://172.15.1.24:554/PVG/live/?PVG=172.15.1.26:2100/admin/admin/av/1/7/31'
           that.data.c_name = res.data.data.channel.sd_channel[0].av_obj;
-          that._getRTSP();
-          // that._login();
+
+          ///
+          var cataloglist = app.globalData.cataloglist;
+          console.log(cataloglist);
+         that.data.pvgtitle = null;
+          var CameraName = that.data.cameraTitle;
+          console.log(CameraName);
+          for (var key in cataloglist) {
+            console.log("22");
+            for (var i = 0; i < cataloglist[key].length; i++) {
+
+              if (cataloglist[key][i].CameraTitle == CameraName) {
+                that.data.pvgtitle = key;
+                console.log("pvgtitle",that.data.pvgtitle);
+                if (that.data.pvgtitle != null ) {
+                  that._getRTSP();
+                  that._login();
+                } else {
+                  wx.hideLoading();
+                  wx.showModal({
+                    title: '提示',
+                    content: '获取视频流失败，请稍后再试',
+                    success: function (res) {
+                      if (res.confirm) {
+                        wx.navigateBack();
+                      } else {
+                        wx.navigateBack();
+                      }
+                    }
+                  })
+                }
+              }
+            }
+          }
+          console.log(that.data.pvgtitle);
+          if (that.data.pvgtitle == null) {
+            wx.hideLoading();
+            wx.showModal({
+              title: '提示',
+              content: '获取视频流失败，请稍后再试',
+              success: function (res) {
+                if (res.confirm) {
+                  wx.navigateBack();
+                } else {
+                  wx.navigateBack();
+                }
+              }
+            })
+          }
+          
         } else {
           wx.showModal({
             title: '提示',
-            content: '获取通道名称失败，请稍后再试',
-            success: function(res) {
-              if (res.confirm) {} else {}
+            content: '获取视频流失败，请稍后再试',
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateBack();
+              } else {
+                wx.navigateBack();
+              }
             }
           })
         }

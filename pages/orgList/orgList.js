@@ -8,7 +8,8 @@ Page({
     currentPage: 0,
     pageSize: 10,
     cameraList: [],
-    orgList: []
+    orgList: [],
+    cameraTitle:""
   },
   onLoad: function(options) {
     console.log("orgList");
@@ -71,9 +72,11 @@ Page({
       }
     })
   },
-  _goPlayerView: function() {
+  _goPlayerView: function(e) {
+    let that = this;
+    console.log("play",e);
     wx.navigateTo({
-      url: '../player/player'
+      url: '../player/player?id=' + e.currentTarget.dataset.id + '&cameraTitle=' + e.currentTarget.dataset.title
     })
   },
   _goOrgList: function(e) {

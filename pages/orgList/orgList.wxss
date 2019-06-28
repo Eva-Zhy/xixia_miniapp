@@ -9,7 +9,7 @@ page {
 }
 
 .zuzhi {
-  width: 46%;
+  /* width: 46%;
   height: auto;
   border-bottom: 1px solid #ddd;
   float: left;
@@ -17,7 +17,17 @@ page {
   margin-right: 2%;
   margin-top: 2.5%;
   background-color: #fff;
-  text-align: center;
+  text-align: center; */
+   width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom: 1px solid #ddd;
+  float: left;
+  /* margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 2.5%; */
+  background-color: #fff;
+  text-align: left;
 }
 
 .wjj-v {
@@ -33,11 +43,11 @@ page {
   height: 30rpx;
   float: right;
   margin-right: 20rpx;
-  margin-top: 35rpx;
+  /* margin-top: 35rpx; */
 }
 
 .wjj-name {
-  width: 100%;
+  /* width: 100%;
   max-width: 350rpx;
   height: 80rpx;
   float: left;
@@ -47,7 +57,12 @@ page {
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-top: 50rpx;
-  border-top: 2rpx solid #f0edf1;
+  border-top: 2rpx solid #f0edf1; */
+  width: auto;
+  height: 100%;
+   float: left;
+  line-height: 80rpx;
+  margin-left: 4%;
 }
 
 .img100 {

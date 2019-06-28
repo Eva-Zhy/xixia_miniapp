@@ -1,5 +1,5 @@
 <view class='live-box'>
-  <live-player class="live-player" id="myLive" bindstatechange="onPlayChange" bindfullscreenchange="onFullscreenChange" src="{{isUrlMain?urlMain:urlAssist}}" mode="live" autoplay="{{isPlay}}" background-mute="{{true}}" object-fit="fillCrop">
+  <live-player class="live-player" id="myLive" bindstatechange="onPlayChange" bindfullscreenchange="onFullscreenChange" src="{{isUrlMain?urlMain:urlAssist}}" mode="live" autoplay="{{isPlay}}" background-mute="{{true}}" object-fit="contain">
     <cover-view class="cover-box" catchtap="handleBarShow">
        <cover-image class="cover-key-center" wx:if="{{!isPlay}}" catchtap="handlePlay" src="../../images/play.png" />
       <cover-view class="cover-key" wx:if="{{isFullscreen && isBarShow}}" catchtap="keepBarShow">

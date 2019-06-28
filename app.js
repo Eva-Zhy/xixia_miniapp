@@ -21,7 +21,7 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
+             
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -32,8 +32,41 @@ App({
         }
       }
     })
+    let that = this;
+    wx.request({
+      url:'https://qxjk.njqxq.gov.cn:84/xcxpj/main/geturlinfo?url=http://qxjk.njqxq.gov.cn:19999/media/cataloglist',
+      
+
+      // url: 'https://qxjk.njqxq.gov.cn:84/xcxpj/main/posturlinfo?url=http://qxjk.njqxq.gov.cn:19999/media/cataloglist',
+
+      
+      method: 'GET',
+      success: function (res) {
+        // this.globalData.cataloglist = res.data;
+        that.globalData.cataloglist = res.data.Catalog
+        // wx.setStorageSync('cataloglist', res.data.Catalog)
+        console.log("cataloglist", that.globalData.cataloglist)
+         
+      }
+    })
+    //  ceshi
+    // wx.request({
+    //   url: 'https://qxjk.njqxq.gov.cn:10800/login',
+    //   method: 'POST',
+    //   data:{
+    //     "username": "admin",
+    //     "password": "e59cf56e33f978124da804b7e12c0d53"
+    //   },
+    //   header:{
+    //       'content-type':'application/json'
+    //   },
+    //   success: function (res) {
+    //     console.log(res);
+    //   }
+    // })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    cataloglist: null
   }
 })
